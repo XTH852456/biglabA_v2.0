@@ -49,11 +49,13 @@ pub extern "C" fn trap_handler() {
     let cause = scause::read();
     if cause.is_interrupt() && cause.code() == 5 {
         put_char(b'T');
+        put_char(b'\n');
         set_next_timer();
         return;
     }
 
     put_char(b'E');
+    put_char(b'\n');
     loop {
         unsafe { core::arch::asm!("wfi"); }
     }

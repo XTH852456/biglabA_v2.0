@@ -1,0 +1,26 @@
+[package]
+name = "tg-rcore-tutorial-ch1-storage"
+version = "0.1.0"
+edition = "2024"
+build = "build.rs"
+
+[[bin]]
+name = "tg-rcore-tutorial-ch1-storage"
+path = "src/main.rs"
+
+[dependencies]
+tg-rcore-tutorial-storage = { path = "../tg-rcore-tutorial-storage" }
+
+[dependencies.tg-sbi]
+version = "0.4.8"
+features = ["nobios"]
+package = "tg-rcore-tutorial-sbi"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+lto = true
+opt-level = "s"
+codegen-units = 1
